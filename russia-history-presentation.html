@@ -441,6 +441,49 @@
             }
         });
 
+        // Touch/Swipe navigation for mobile
+        let touchStartX = 0;
+        let touchEndX = 0;
+        const minSwipeDistance = 50;
+
+        document.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        }, false);
+
+        document.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        }, false);
+
+        function handleSwipe() {
+            const swipeDistance = touchEndX - touchStartX;
+
+            if (Math.abs(swipeDistance) > minSwipeDistance) {
+                if (swipeDistance > 0) {
+                    // Swipe right - previous slide
+                    prevSlide();
+                } else {
+                    // Swipe left - next slide
+                    nextSlide();
+                }
+            }
+        }
+
+        // Click on left/right side of screen for navigation (mobile friendly)
+        document.querySelector('.presentation-container').addEventListener('click', (e) => {
+            const clickX = e.clientX;
+            const screenWidth = window.innerWidth;
+
+            // If click is not on a button
+            if (!e.target.classList.contains('nav-btn')) {
+                if (clickX < screenWidth / 2) {
+                    prevSlide();
+                } else {
+                    nextSlide();
+                }
+            }
+        });
+
         // Initialize
         document.getElementById('total-slides').textContent = totalSlides;
         showSlide(0);
