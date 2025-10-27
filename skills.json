@@ -1,0 +1,107 @@
+{
+  "skills": {
+    "presentation": {
+      "category": "Presentation & Communication",
+      "items": [
+        {
+          "name": "PowerPoint (PPT) 작성",
+          "level": "Expert",
+          "description": "전문적이고 설득력 있는 프레젠테이션 자료 작성",
+          "details": [
+            "스토리텔링 기반의 논리적인 슬라이드 구성",
+            "데이터 시각화 및 인포그래픽 디자인",
+            "기업 발표, 제안서, 교육자료 제작",
+            "템플릿 디자인 및 브랜딩 일관성 유지",
+            "애니메이션 및 전환 효과 활용"
+          ]
+        },
+        {
+          "name": "프레젠테이션 디자인",
+          "level": "Advanced",
+          "description": "시각적으로 매력적이고 이해하기 쉬운 슬라이드 디자인",
+          "details": [
+            "색상 이론 및 타이포그래피 적용",
+            "레이아웃 및 구도 설계",
+            "아이콘 및 이미지 선택 및 편집",
+            "차트 및 그래프 최적화",
+            "슬라이드 마스터 및 테마 관리"
+          ]
+        },
+        {
+          "name": "비즈니스 커뮤니케이션",
+          "level": "Advanced",
+          "description": "효과적인 메시지 전달 및 청중 맞춤형 커뮤니케이션",
+          "details": [
+            "핵심 메시지 도출 및 구조화",
+            "청중 분석 및 맞춤형 콘텐츠 개발",
+            "설득력 있는 제안서 작성",
+            "임원진 보고 자료 준비",
+            "발표 스크립트 작성"
+          ]
+        },
+        {
+          "name": "데이터 시각화",
+          "level": "Advanced",
+          "description": "복잡한 데이터를 명확하고 이해하기 쉽게 시각화",
+          "details": [
+            "Excel, Tableau, Power BI 연동",
+            "대시보드 및 리포트 디자인",
+            "통계 데이터의 효과적인 표현",
+            "비교, 추세, 분포 시각화",
+            "인터랙티브 차트 활용"
+          ]
+        }
+      ]
+    },
+    "officeTools": {
+      "category": "Office Productivity Tools",
+      "items": [
+        {
+          "name": "Microsoft PowerPoint",
+          "level": "Expert",
+          "description": "고급 기능을 활용한 전문 프레젠테이션 제작"
+        },
+        {
+          "name": "Google Slides",
+          "level": "Advanced",
+          "description": "클라우드 기반 협업 프레젠테이션 제작"
+        },
+        {
+          "name": "Keynote",
+          "level": "Intermediate",
+          "description": "Apple Keynote를 활용한 프레젠테이션 제작"
+        },
+        {
+          "name": "Canva",
+          "level": "Advanced",
+          "description": "디자인 템플릿 기반 프레젠테이션 및 그래픽 제작"
+        },
+        {
+          "name": "Prezi",
+          "level": "Intermediate",
+          "description": "동적인 비선형 프레젠테이션 제작"
+        }
+      ]
+    },
+    "design": {
+      "category": "Design Tools",
+      "items": [
+        {
+          "name": "Adobe Creative Suite",
+          "level": "Intermediate",
+          "description": "Illustrator, Photoshop을 활용한 그래픽 리소스 제작"
+        },
+        {
+          "name": "Figma",
+          "level": "Intermediate",
+          "description": "UI/UX 디자인 및 프로토타이핑"
+        }
+      ]
+    }
+  },
+  "metadata": {
+    "lastUpdated": "2025-10-27",
+    "version": "1.0.0",
+    "language": "ko"
+  }
+}

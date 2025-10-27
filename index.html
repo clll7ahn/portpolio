@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - Skills Showcase</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            color: white;
+            margin-bottom: 50px;
+        }
+
+        h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .subtitle {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .category-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .category-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .category-title {
+            font-size: 1.5em;
+            color: #667eea;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        .skill-item {
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .skill-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .skill-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .skill-name {
+            font-size: 1.2em;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .skill-level {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 500;
+        }
+
+        .skill-description {
+            color: #666;
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+
+        .skill-details {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .skill-details li {
+            padding: 5px 0 5px 20px;
+            color: #555;
+            position: relative;
+            font-size: 0.95em;
+        }
+
+        .skill-details li:before {
+            content: "▹";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        footer {
+            text-align: center;
+            color: white;
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .loading {
+            text-align: center;
+            color: white;
+            font-size: 1.5em;
+            padding: 50px;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .category-card {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Portfolio</h1>
+            <p class="subtitle">Professional Skills Showcase</p>
+        </header>
+
+        <div id="skills-container" class="loading">
+            Loading skills...
+        </div>
+
+        <footer>
+            <p>Last Updated: <span id="last-updated"></span></p>
+        </footer>
+    </div>
+
+    <script>
+        async function loadSkills() {
+            try {
+                const response = await fetch('skills.json');
+                const data = await response.json();
+
+                displaySkills(data);
+                document.getElementById('last-updated').textContent = data.metadata.lastUpdated;
+            } catch (error) {
+                document.getElementById('skills-container').innerHTML =
+                    '<p style="color: white;">Error loading skills data. Please check skills.json file.</p>';
+                console.error('Error loading skills:', error);
+            }
+        }
+
+        function displaySkills(data) {
+            const container = document.getElementById('skills-container');
+            container.className = 'skills-grid';
+            container.innerHTML = '';
+
+            for (const [key, category] of Object.entries(data.skills)) {
+                const categoryCard = document.createElement('div');
+                categoryCard.className = 'category-card';
+
+                const categoryTitle = document.createElement('h2');
+                categoryTitle.className = 'category-title';
+                categoryTitle.textContent = category.category;
+                categoryCard.appendChild(categoryTitle);
+
+                category.items.forEach(skill => {
+                    const skillItem = document.createElement('div');
+                    skillItem.className = 'skill-item';
+
+                    const skillHeader = document.createElement('div');
+                    skillHeader.className = 'skill-header';
+
+                    const skillName = document.createElement('div');
+                    skillName.className = 'skill-name';
+                    skillName.textContent = skill.name;
+                    skillHeader.appendChild(skillName);
+
+                    const skillLevel = document.createElement('span');
+                    skillLevel.className = 'skill-level';
+                    skillLevel.textContent = skill.level;
+                    skillHeader.appendChild(skillLevel);
+
+                    skillItem.appendChild(skillHeader);
+
+                    if (skill.description) {
+                        const description = document.createElement('p');
+                        description.className = 'skill-description';
+                        description.textContent = skill.description;
+                        skillItem.appendChild(description);
+                    }
+
+                    if (skill.details && skill.details.length > 0) {
+                        const detailsList = document.createElement('ul');
+                        detailsList.className = 'skill-details';
+                        skill.details.forEach(detail => {
+                            const li = document.createElement('li');
+                            li.textContent = detail;
+                            detailsList.appendChild(li);
+                        });
+                        skillItem.appendChild(detailsList);
+                    }
+
+                    categoryCard.appendChild(skillItem);
+                });
+
+                container.appendChild(categoryCard);
+            }
+        }
+
+        // Load skills when page loads
+        window.addEventListener('DOMContentLoaded', loadSkills);
+    </script>
+</body>
+</html>
